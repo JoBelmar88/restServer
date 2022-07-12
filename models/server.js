@@ -1,7 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
-import {router} from '../routes/user.routes.js'
+import { router } from '../routes/user.routes.js'
 
 class Server {
     constructor() {
@@ -16,7 +16,6 @@ class Server {
     };
 
     routes() {
-        
         this.app.use('/api/usuarios', router);
     };
 
@@ -32,6 +31,9 @@ class Server {
 
         // Directorio público
         this.app.use(express.static('public'));
+
+        // Lectura y parseo del body
+        this.app.use(express.json());
     };
 };
 

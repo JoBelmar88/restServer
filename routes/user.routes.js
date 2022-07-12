@@ -1,34 +1,17 @@
 import { Router } from "express";
+import { usuariosGet, usuariosPost, usuariosDelete, usuariosPut, usuariosPatch} from "../controllers/usuarios.controller.js";
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.json({
-        saludo: 'Hello World',
-        peticion: 'GET API'
-    });
-});
+router.get('/', usuariosGet);
 
-router.put('/', (req, res) => {
-    res.status(201).json({
-        saludo: 'Hello World',
-        peticion: 'PUT API'
-    });
-});
+router.post('/', usuariosPost);
 
-router.delete('/', (req, res) => {
-    res.json({
-        saludo: 'Hello World',
-        peticion: 'DELETE API'
-    });
-});
+router.delete('/', usuariosDelete);
 
-router.post('/', (req, res) => {
-    res.json({
-        saludo: 'Hello World',
-        peticion: 'POST API'
-    });
-});
+router.put('/:id', usuariosPut);
+
+router.patch('/', usuariosPatch);
 
 export {
     router
