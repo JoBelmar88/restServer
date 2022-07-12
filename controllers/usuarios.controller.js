@@ -1,12 +1,15 @@
 import { response } from 'express';
 
 const usuariosGet = (req, res = response) => {
-    const {nombre, edad = 0} = req.query;
+    const {nombre, edad = 0, limit = 1, page = 1} = req.query;
 
     res.json({
         saludo: 'Hello World',
         peticion: 'GET API - CONTROLLER',
-        nombre
+        nombre,
+        edad,
+        limit,
+        page
     });
 };
 
