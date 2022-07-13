@@ -1,13 +1,16 @@
 import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
-import { router } from '../routes/user.routes.js'
+import { router } from '../routes/user.routes.js';
+import { dbConnection } from '../database/config.js';
 
 class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
-
+        this.usuariosPath = '/api/usuarios';
+        // Conectar a Base de Datos
+        this.conectarDb();
         // Middlewares
         this.middlewares();
         // Rutas de mi aplicación
@@ -15,8 +18,12 @@ class Server {
         this.listen();
     };
 
+    async conectarDb(){
+        await dbConnection();
+    }
+
     routes() {
-        this.app.use('/api/usuarios', router);
+        this.app.use(this.usuariosPath, router);
     };
 
     listen() {
@@ -34,6 +41,7 @@ class Server {
 
         // Lectura y parseo del body
         this.app.use(express.json());
+
     };
 };
 
